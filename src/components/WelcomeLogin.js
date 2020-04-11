@@ -2,14 +2,28 @@ import React from "react";
 import logo from "../images/logo1.png";
 
 const scopes = "user-read-private user-read-email";
-const redirect_uri = "http://localhost:3000/dashboard/";
+const redirect_uri = "http://localhost:3000/redirecting/";
 const my_client_id = "ce89838d1d684c2b99207918a9062d3a";
+var state = generateRandomString(16);
+function generateRandomString(length) {
+  var text = "";
+  var possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+}
 
 function Welcome() {
   const RedirectToLogin = () => {
-    const loginURL = `https://accounts.spotify.com/authorize?response_type=code&client_id=${my_client_id}&redirect_uri=${encodeURIComponent(
+    const loginURL = `https://accounts.spotify.com/authorize?response_type=token&client_id=${my_client_id}&redirect_uri=${encodeURIComponent(
       redirect_uri
-    )}${scopes ? `&scope=${encodeURIComponent(scopes)}` : ""}`;
+    )}${
+      scopes ? `&scope=${encodeURIComponent(scopes)}` : ""
+    }&state=${state}&expires_in=1`;
+    console.log("inte", loginURL);
     window.location.href = loginURL;
   };
   return (
