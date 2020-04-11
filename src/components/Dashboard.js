@@ -2,14 +2,18 @@ import React from "react";
 import Loader from "react-loader";
 import { withRouter } from "react-router-dom";
 import { useGET } from "../utils/api";
-import { removeAllItems } from "../utils/cookie";
+import logo from "../images/logo1.png";
+
+const Header = () => (
+  <div style={styles.HeaderContainer}>
+    <p style={styles.ImgLogoText}>
+      <img src={logo} style={styles.imgStyle} alt="logo" />
+      Beatzz...
+    </p>
+  </div>
+);
 
 function Dashboard({ history }) {
-  const handleLogout = () => {
-    console.log("logging out");
-    removeAllItems("access_token");
-    history.push("/");
-  };
   const [loading, data, error] = useGET("https://api.spotify.com/v1/me");
   if (loading) {
     return <Loader />;
@@ -18,12 +22,7 @@ function Dashboard({ history }) {
   } else {
     return (
       <div>
-        <p>Dashboard</p>
-        <div style={styles.ButtonContainer} onClick={handleLogout}>
-          <p style={styles.LoginLink}>
-            <b>Login</b>
-          </p>
-        </div>
+        <Header />
       </div>
     );
   }
@@ -32,13 +31,20 @@ function Dashboard({ history }) {
 export default withRouter(Dashboard);
 
 const styles = {
-  ButtonContainer: { backgroundColor: "#1DB954", borderRadius: 50 },
-  AppLogo: {
-    height: 150
+  HeaderContainer: {
+    backgroundColor: "#000000",
+    paddingTop: 15,
+    paddingBottom: 15
   },
-  LoginLink: {
-    color: "#000000",
-    fontSize: 15,
-    padding: "2px 30px 2px 30px"
+  ImgLogoText: {
+    margin: 0,
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: 800
+  },
+  imgStyle: {
+    height: 20,
+    width: 20,
+    paddingRight: 12
   }
 };
