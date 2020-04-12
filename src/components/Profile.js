@@ -2,7 +2,10 @@ import React from "react";
 import Loader from "react-loader";
 import { useGET } from "../utils/api";
 import profileDefault from "../images/profileDefault.png";
+import Email from "../images/email.png";
+import Subscription from "../images/subscription.svg";
 import { getCountryName } from "../utils/countryName";
+import Country from "../images/country.png";
 
 const Header = () => (
   <div style={styles.HeaderContainer}>
@@ -40,48 +43,45 @@ function Profile() {
     return (
       <div>
         <Header />
-        <div style={{ margin: 16, marginTop: 42 }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginBottom: 43
-            }}
-          >
+        <div style={styles.Container}>
+          <div style={styles.dpContainer}>
             <img
               src={images.length > 0 ? images[0].url : profileDefault}
               alt="img"
-              style={{
-                height: 120,
-                width: 120,
-                borderRadius: 60,
-                alignSelf: "center"
-              }}
+              style={styles.dp}
             />
           </div>
-          <div
-            style={{
-              textAlign: "center",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center"
-            }}
-          >
-            <p>
-              <b>Name: {display_name}</b>
+          <div style={styles.subContainer}>
+            <p style={styles.name}>
+              <b>{display_name}</b>
             </p>
-            <p>
-              <b>Email: {email}</b>
-            </p>
-            <p>
-              <b>Subscription: {product === "open" ? "Free" : "Premium"}</b>
-            </p>
-            <p>
-              <b>Country: {getCountryName(country)}</b>
-            </p>
-            <p style={{ marginBottom: 40 }}>
+            <p style={styles.followers}>
               <b>Followers: {followers.total}</b>
             </p>
+            <div style={styles.EmailContainer}>
+              <img src={Email} alt="img" style={styles.EmailIcon} />
+              <p style={styles.TextDetail}>
+                <b> {email}</b>
+              </p>
+            </div>
+            <div style={{ ...styles.EmailContainer, marginTop: 24 }}>
+              <img
+                src={Subscription}
+                alt="img"
+                style={styles.subscriptionIcon}
+              />
+              <p style={styles.subsText}>
+                <b>
+                  Subscription : {product === "open" ? " Free" : " Premium"}
+                </b>
+              </p>
+            </div>
+            <div style={{ ...styles.EmailContainer, marginTop: 24 }}>
+              <img src={Country} alt="img" style={styles.countryImg} />
+              <p style={styles.countryText}>
+                <b>Country: {getCountryName(country)}</b>
+              </p>
+            </div>
             <div
               style={styles.ButtonContainer}
               onClick={() => {
@@ -100,6 +100,21 @@ function Profile() {
 export default Profile;
 
 const styles = {
+  Container: {
+    margin: 16,
+    marginTop: 42
+  },
+  dpContainer: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  dp: {
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+    alignSelf: "center",
+    boxShadow: "5px 5px 10px grey"
+  },
   HeaderContainer: {
     backgroundColor: "#000000",
     paddingTop: 15,
@@ -112,15 +127,17 @@ const styles = {
     color: "#000000",
     fontSize: 15,
     textAlign: "center",
-    paddingTop: 5,
+    paddingTop: 7,
     fontWeight: 600,
     margin: 0
   },
   ButtonContainer: {
     backgroundColor: "#1DB954",
     borderRadius: 50,
-    height: 30,
-    width: 100
+    height: 35,
+    width: 100,
+    marginTop: 50,
+    boxShadow: "1px 1px 6px grey"
   },
   ImgLogoText: {
     paddingLeft: 12,
@@ -129,5 +146,57 @@ const styles = {
     fontSize: 20,
     fontWeight: 800,
     display: "flex"
+  },
+  EmailContainer: {
+    boxShadow: "0px 0px 10px  #909090",
+    marginTop: 50,
+    borderRadius: 10,
+    borderColor: "#909090",
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  EmailIcon: {
+    height: 22,
+    width: 25,
+    padding: 15
+  },
+  subscriptionIcon: {
+    height: 25,
+    width: 25,
+    padding: 10
+  },
+  TextDetail: {
+    padding: "12px 50px 12px 15px",
+    margin: 0
+  },
+  subContainer: {
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  name: {
+    fontSize: 20,
+    marginBottom: 10
+  },
+  followers: {
+    margin: 0,
+    fontSize: 14,
+    color: "#686868"
+  },
+  subsText: {
+    margin: 0,
+    padding: "10px 120px 10px 15px"
+  },
+  countryImg: {
+    height: 25,
+    width: 25,
+    padding: 10
+  },
+  countryText: {
+    margin: 0,
+    padding: "10px 152px 10px 15px"
   }
 };
