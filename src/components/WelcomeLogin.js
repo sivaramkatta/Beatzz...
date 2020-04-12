@@ -49,7 +49,10 @@ const styles = {
   Container: {
     textAlign: "center"
   },
-  ButtonContainer: { backgroundColor: "#1DB954", borderRadius: 50 },
+  ButtonContainer: {
+    backgroundColor: "#1DB954",
+    borderRadius: 50
+  },
   AppLogo: {
     height: 150
   },

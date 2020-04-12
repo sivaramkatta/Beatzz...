@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getItem } from "./cookie";
+import { getItem, removeAllItems } from "./cookie";
 
 export function useGET(url) {
   const [loading, setLoading] = useState(true);
@@ -13,9 +13,20 @@ export function useGET(url) {
     })
       .then(response => response.json())
       .then(data => {
-        console.log("success", data);
-        setLoading(false);
-        setData(data);
+        if (data.hasOwnProperty("error")) {
+          if (data.error.status === 401) {
+            removeAllItems();
+            window.location.href = "http://localhost:3000/";
+          } else {
+            console.log("error", data);
+            setLoading(false);
+            setError(error);
+          }
+        } else {
+          console.log("success", data);
+          setLoading(false);
+          setData(data);
+        }
       })
       .catch(error => {
         console.log("error", error);

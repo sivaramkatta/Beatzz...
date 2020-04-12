@@ -5,18 +5,21 @@ import { useGET } from "../utils/api";
 import logo from "../images/logo1.png";
 import profileDefault from "../images/profileDefault.png";
 
-const Header = ({ image }) => (
+const Header = ({ image, history }) => (
   <div style={styles.HeaderContainer}>
     <div style={styles.ImgLogoText}>
       <img src={logo} style={styles.imgStyle} alt="logo" />
       <p style={{ padding: 0, margin: 4 }}>Beatzz...</p>
     </div>
     <img
-      src={image.url ? profileDefault : profileDefault}
+      src={image.url ? image.url : profileDefault}
+      onClick={() => {
+        history.push("/profile");
+      }}
       style={{
         height: 30,
         width: 30,
-        float: "right",
+        borderRadius: 15,
         marginRight: 12
       }}
       alt="img"
@@ -32,7 +35,9 @@ function Dashboard({ history }) {
     return <p style={{ textAlign: "center" }}>something went wrong</p>;
   } else {
     const { images = [] } = data;
-    return <Header image={images.length > 0 ? images[0] : {}} />;
+    return (
+      <Header image={images.length > 0 ? images[0] : {}} history={history} />
+    );
   }
 }
 
