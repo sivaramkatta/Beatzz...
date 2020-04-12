@@ -90,7 +90,6 @@ export default Profile;
 
 const styles = {
   Container: {
-    margin: 16,
     marginTop: 42
   },
   dpContainer: {
