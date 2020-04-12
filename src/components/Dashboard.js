@@ -3,13 +3,24 @@ import Loader from "react-loader";
 import { withRouter } from "react-router-dom";
 import { useGET } from "../utils/api";
 import logo from "../images/logo1.png";
+import profileDefault from "../images/profileDefault.png";
 
-const Header = () => (
+const Header = ({ image }) => (
   <div style={styles.HeaderContainer}>
-    <p style={styles.ImgLogoText}>
+    <div style={styles.ImgLogoText}>
       <img src={logo} style={styles.imgStyle} alt="logo" />
-      Beatzz...
-    </p>
+      <p style={{ padding: 0, margin: 4 }}>Beatzz...</p>
+    </div>
+    <img
+      src={image.url ? profileDefault : profileDefault}
+      style={{
+        height: 30,
+        width: 30,
+        float: "right",
+        marginRight: 12
+      }}
+      alt="img"
+    />
   </div>
 );
 
@@ -20,11 +31,8 @@ function Dashboard({ history }) {
   } else if (error) {
     return <p style={{ textAlign: "center" }}>something went wrong</p>;
   } else {
-    return (
-      <div>
-        <Header />
-      </div>
-    );
+    const { images = [] } = data;
+    return <Header image={images.length > 0 ? images[0] : {}} />;
   }
 }
 
@@ -34,17 +42,22 @@ const styles = {
   HeaderContainer: {
     backgroundColor: "#000000",
     paddingTop: 15,
-    paddingBottom: 15
+    paddingBottom: 15,
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "space-between"
   },
   ImgLogoText: {
+    paddingLeft: 12,
     margin: 0,
     color: "#ffffff",
-    fontSize: 18,
-    fontWeight: 800
+    fontSize: 20,
+    fontWeight: 800,
+    display: "flex"
   },
   imgStyle: {
-    height: 20,
-    width: 20,
-    paddingRight: 12
+    height: 30,
+    width: 30,
+    paddingRight: 5
   }
 };
