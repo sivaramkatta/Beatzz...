@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -18,6 +18,7 @@ import { withRouter } from "react-router-dom";
 import logo from "../images/logo1.png";
 
 const drawerWidth = 240;
+export const TrackContext = React.createContext();
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,6 +57,7 @@ const Tabs = [
 
 function ResponsiveDrawer(props) {
   const { container } = props;
+  const [track, setTrack] = useState("");
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -144,7 +146,32 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content} style={{ margin: 0, padding: 0 }}>
         <div className={classes.toolbar} />
-        {props.children}
+        <TrackContext.Provider value={{ track, setTrack }}>
+          {props.children}
+        </TrackContext.Provider>
+        {track && (
+          <div
+            style={{
+              position: "sticky",
+              bottom: 0,
+              zIndex: 1,
+              display: "flex",
+              flex: 1,
+              opacity: 0.8
+            }}
+          >
+            <iframe
+              title="song"
+              src={`https://open.spotify.com/embed/track/${track}`}
+              height="90"
+              width="100%"
+              frameborder="0"
+              allowtransparency="true"
+              allow="encrypted-media"
+              autoplay="true"
+            />
+          </div>
+        )}
       </main>
     </div>
   );

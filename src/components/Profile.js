@@ -31,7 +31,7 @@ function Profile() {
       followers = {}
     } = data;
     return (
-      <div>
+      <div style={{ height: "90vh" }}>
         <div style={styles.Container}>
           <div style={styles.dpContainer}>
             <img
