@@ -72,6 +72,7 @@ const styles = {
   LoginLink: {
     color: "#000000",
     fontSize: 15,
-    padding: "2px 30px 2px 30px"
+    padding: "2px 30px 2px 30px",
+    userSelect: "none"
   }
 };

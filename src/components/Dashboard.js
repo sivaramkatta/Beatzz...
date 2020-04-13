@@ -55,9 +55,10 @@ function RecentPlayedWidget({ setTrack }) {
   );
   let List = null;
   if (data.items) {
-    List = data.items.map(({ track }) => {
+    List = data.items.map(({ track }, index) => {
       return (
         <div
+          key={index}
           onClick={() => {
             console.log(track);
             setTrack(track.id);
