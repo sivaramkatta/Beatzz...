@@ -17,6 +17,7 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { withRouter } from "react-router-dom";
 import logo from "../images/logo1.png";
 import SearchIcon from "@material-ui/icons/Search";
+import CategoryIcon from "@material-ui/icons/Category";
 
 const drawerWidth = 240;
 export const TrackContext = React.createContext();
@@ -79,6 +80,7 @@ const useStyles = makeStyles(theme => ({
 const Tabs = [
   { title: "Home", component: <HomeIcon />, route: "/dashboard" },
   { title: "Search", component: <SearchIcon />, route: "/search" },
+  { title: "Genre", component: <CategoryIcon />, route: "/categories" },
   { title: "Profile", component: <AccountBoxIcon />, route: "/profile" }
 ];
 
@@ -199,7 +201,7 @@ function ResponsiveDrawer(props) {
           {props.children}
         </TrackContext.Provider>
         {track && (
-          <div>
+          <div style={{ marginTop: 100 }}>
             <Hidden smUp implementation="css">
               <Player left={0} track={track} />
             </Hidden>
