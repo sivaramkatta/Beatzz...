@@ -1,6 +1,7 @@
 import React from "react";
 import { useGET } from "../utils/api";
 import TrackCard from "./CommonCard";
+import Loader from "react-loader-spinner";
 
 function uniq(list) {
   let filteredList = [];
@@ -41,14 +42,19 @@ function RecentPlayedWidget({ setTrack }) {
   }
   return (
     <div>
-      <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>Recently played</h2>
+      <h2 style={{ paddingLeft: 16, paddingTop: 25 }}>Recently played</h2>
       <div
         style={{
           display: "flex",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
+          justifyContent: loading ? "center" : ""
         }}
       >
-        {!!List && List}
+        {loading ? (
+          <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
+        ) : (
+          !!List && List
+        )}
       </div>
     </div>
   );

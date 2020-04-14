@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "react-loader";
+import Loader from "react-loader-spinner";
 import { useGET } from "../utils/api";
 import profileDefault from "../images/profileDefault.png";
 import Email from "../images/email.png";
@@ -11,8 +11,14 @@ function Profile() {
   const [loading, data, error] = useGET("https://api.spotify.com/v1/me");
   if (loading) {
     return (
-      <div>
-        <Loader />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "20%"
+        }}
+      >
+        <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
       </div>
     );
   } else if (error) {

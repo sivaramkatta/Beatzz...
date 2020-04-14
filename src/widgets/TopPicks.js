@@ -1,6 +1,7 @@
 import React from "react";
 import { useGET } from "../utils/api";
 import TrackCard from "./CommonCard";
+import Loader from "react-loader-spinner";
 
 function TopPicksWidget({ setTrack }) {
   const [loading, data, error] = useGET(
@@ -32,10 +33,15 @@ function TopPicksWidget({ setTrack }) {
       <div
         style={{
           display: "flex",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
+          justifyContent: loading ? "center" : ""
         }}
       >
-        {!!List && List}
+        {loading ? (
+          <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
+        ) : (
+          !!List && List
+        )}
       </div>
     </div>
   );
