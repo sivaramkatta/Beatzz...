@@ -21,6 +21,31 @@ import SearchIcon from "@material-ui/icons/Search";
 const drawerWidth = 240;
 export const TrackContext = React.createContext();
 
+const Player = ({ left, track }) => (
+  <div
+    style={{
+      position: "fixed",
+      bottom: -10,
+      zIndex: 1,
+      display: "flex",
+      flex: 1,
+      opacity: 0.9,
+      right: 0,
+      left: left
+    }}
+  >
+    <iframe
+      title="song"
+      src={`https://open.spotify.com/embed/${track}`}
+      height="90"
+      width="100%"
+      frameborder="0"
+      allowtransparency="true"
+      allow="encrypted-media"
+    />
+  </div>
+);
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex"
@@ -152,25 +177,13 @@ function ResponsiveDrawer(props) {
           {props.children}
         </TrackContext.Provider>
         {track && (
-          <div
-            style={{
-              position: "sticky",
-              bottom: 0,
-              zIndex: 1,
-              display: "flex",
-              flex: 1,
-              opacity: 0.9
-            }}
-          >
-            <iframe
-              title="song"
-              src={`https://open.spotify.com/embed/${track}`}
-              height="90"
-              width="100%"
-              frameborder="0"
-              allowtransparency="true"
-              allow="encrypted-media"
-            />
+          <div>
+            <Hidden smUp implementation="css">
+              <Player left={0} track={track} />
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Player left={240} track={track} />
+            </Hidden>
           </div>
         )}
       </main>
