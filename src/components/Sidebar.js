@@ -168,7 +168,6 @@ function ResponsiveDrawer(props) {
               frameborder="0"
               allowtransparency="true"
               allow="encrypted-media"
-              autoplay="true"
             />
           </div>
         )}
