@@ -146,7 +146,7 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content} style={{ margin: 0, padding: 0 }}>
         <div className={classes.toolbar} />
-        <TrackContext.Provider value={{ track, setTrack }}>
+        <TrackContext.Provider value={{ setTrack }}>
           {props.children}
         </TrackContext.Provider>
         {track && (
@@ -157,12 +157,12 @@ function ResponsiveDrawer(props) {
               zIndex: 1,
               display: "flex",
               flex: 1,
-              opacity: 0.8
+              opacity: 0.9
             }}
           >
             <iframe
               title="song"
-              src={`https://open.spotify.com/embed/track/${track}`}
+              src={`https://open.spotify.com/embed/${track}`}
               height="90"
               width="100%"
               frameborder="0"
