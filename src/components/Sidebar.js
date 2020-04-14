@@ -135,9 +135,31 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <div style={styles.ImgLogoText}>
-            <img src={logo} style={styles.imgStyle} alt="logo" />
-            <p style={{ padding: 0, margin: 4 }}>Beatzz...</p>
+          <div
+            style={{
+              display: "flex",
+              flex: 1,
+              justifyContent: "space-between"
+            }}
+          >
+            <div style={styles.ImgLogoText}>
+              <img src={logo} style={styles.imgStyle} alt="logo" />
+              <p style={{ padding: 0, margin: 4 }}>Beatzz...</p>
+            </div>
+            <Hidden xsDown implementation="css">
+              <p
+                style={{
+                  float: "right",
+                  padding: 0,
+                  margin: 6,
+                  fontFamily: "monospace",
+                  fontSize: 17,
+                  color: "grey"
+                }}
+              >
+                music makes me high
+              </p>
+            </Hidden>
           </div>
         </Toolbar>
       </AppBar>
