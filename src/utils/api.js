@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getItem, removeAllItems } from "./cookie";
 
-export function useGET(url) {
+export function useGET(url, dependency = []) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [result, setData] = useState({});
@@ -33,6 +33,6 @@ export function useGET(url) {
         setLoading(false);
         setError(error);
       });
-  }, [url]);
+  }, dependency);
   return [loading, result, error];
 }
