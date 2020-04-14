@@ -41,6 +41,7 @@ function Search() {
         <input
           placeholder="Search tracks or albums"
           style={{
+            backgroundColor: "#fafafa",
             outline: "#ffffff",
             marginTop: 25,
             textAlign: "center",

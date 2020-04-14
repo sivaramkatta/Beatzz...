@@ -1,9 +1,11 @@
 import React from "react";
+import TrackDefault from "../images/defaultTrack.jpg";
 
-const TrackCard = ({ artist, track, imageDetails }) => {
+const TrackCard = ({ artist, track, imageDetails = {} }) => {
   return (
     <div
       style={{
+        cursor: "pointer",
         backgroundColor: "white",
         height: 300,
         padding: 16,
@@ -14,7 +16,7 @@ const TrackCard = ({ artist, track, imageDetails }) => {
       }}
     >
       <img
-        src={imageDetails.url}
+        src={imageDetails.url ? imageDetails.url : TrackDefault}
         alt="img"
         style={{ height: 200, width: 200, borderRadius: 4 }}
       />
