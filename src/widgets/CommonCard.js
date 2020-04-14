@@ -1,13 +1,18 @@
 import React from "react";
 import TrackDefault from "../images/defaultTrack.jpg";
 
-const TrackCard = ({ artist, track, imageDetails = {} }) => {
+const TrackCard = ({
+  artist,
+  track,
+  imageDetails = {},
+  isCategory = false
+}) => {
   return (
     <div
       style={{
         cursor: "pointer",
         backgroundColor: "white",
-        height: 300,
+        height: isCategory ? 280 : 300,
         padding: 16,
         width: 230,
         margin: 12,
@@ -33,18 +38,20 @@ const TrackCard = ({ artist, track, imageDetails = {} }) => {
       >
         {track}
       </p>
-      <p
-        style={{
-          color: "grey",
-          textAlign: "center",
-          fontWeight: 600,
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis"
-        }}
-      >
-        {artist}
-      </p>
+      {!isCategory && (
+        <p
+          style={{
+            color: "grey",
+            textAlign: "center",
+            fontWeight: 600,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis"
+          }}
+        >
+          {artist}
+        </p>
+      )}
     </div>
   );
 };

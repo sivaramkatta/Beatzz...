@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../images/logo1.png";
 
 const scopes =
-  "user-read-private user-read-email user-read-recently-played user-top-read";
+  "user-read-private user-read-email user-read-recently-played user-top-read playlist-modify-public playlist-modify-private";
 const redirect_uri = "http://localhost:3000/redirecting/";
 const my_client_id = "ce89838d1d684c2b99207918a9062d3a";
 var state = generateRandomString(16);

@@ -82,7 +82,7 @@ function Search() {
           {List}
         </div>
       ) : (
-        <TopPicks />
+        <TopPicks setTrack={setTrack} />
       )}
     </div>
   );
