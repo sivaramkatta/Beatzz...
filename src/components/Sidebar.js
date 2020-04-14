@@ -16,6 +16,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { withRouter } from "react-router-dom";
 import logo from "../images/logo1.png";
+import SearchIcon from "@material-ui/icons/Search";
 
 const drawerWidth = 240;
 export const TrackContext = React.createContext();
@@ -52,6 +53,7 @@ const useStyles = makeStyles(theme => ({
 
 const Tabs = [
   { title: "Home", component: <HomeIcon />, route: "/dashboard" },
+  { title: "Search", component: <SearchIcon />, route: "/search" },
   { title: "Profile", component: <AccountBoxIcon />, route: "/profile" }
 ];
 
