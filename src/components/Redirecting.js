@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { setItem } from "../utils/cookie";
 import { withRouter } from "react-router-dom";
-import Loader from "react-loader";
+import Loader from "react-loader-spinner";
 
 function Dashboard({ history }) {
   useEffect(() => {
@@ -9,7 +9,17 @@ function Dashboard({ history }) {
     setItem("access_token", tokenDetails);
     history.push("/dashboard");
   }, []);
-  return <Loader />;
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "20%"
+      }}
+    >
+      <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
+    </div>
+  );
 }
 
 export default withRouter(Dashboard);

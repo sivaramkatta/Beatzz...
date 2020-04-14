@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "react-loader";
+import Loader from "react-loader-spinner";
 import { useGET } from "../utils/api";
 import profileDefault from "../images/profileDefault.png";
 import Email from "../images/email.png";
@@ -7,27 +7,23 @@ import Subscription from "../images/subscription.svg";
 import { getCountryName } from "../utils/countryName";
 import Country from "../images/country.png";
 
-const Header = () => (
-  <div style={styles.HeaderContainer}>
-    <div style={styles.ImgLogoText}>
-      <p style={{ padding: 0, margin: 4 }}>Profile</p>
-    </div>
-  </div>
-);
-
 function Profile() {
   const [loading, data, error] = useGET("https://api.spotify.com/v1/me");
   if (loading) {
     return (
-      <div>
-        <Header />
-        <Loader />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "20%"
+        }}
+      >
+        <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
       </div>
     );
   } else if (error) {
     return (
       <div>
-        <Header />
         <p style={{ textAlign: "center" }}>something went wrong</p>
       </div>
     );
@@ -41,8 +37,7 @@ function Profile() {
       followers = {}
     } = data;
     return (
-      <div>
-        <Header />
+      <div style={{ height: "90vh" }}>
         <div style={styles.Container}>
           <div style={styles.dpContainer}>
             <img
@@ -101,7 +96,6 @@ export default Profile;
 
 const styles = {
   Container: {
-    margin: 16,
     marginTop: 42
   },
   dpContainer: {
@@ -158,17 +152,17 @@ const styles = {
     alignItems: "center"
   },
   EmailIcon: {
-    height: 22,
-    width: 25,
-    padding: 15
+    height: 45,
+    width: 45,
+    padding: 10
   },
   subscriptionIcon: {
-    height: 25,
-    width: 25,
+    height: 45,
+    width: 45,
     padding: 10
   },
   TextDetail: {
-    padding: "12px 50px 12px 15px",
+    padding: "12px 60px 12px 15px",
     margin: 0
   },
   subContainer: {
@@ -191,8 +185,8 @@ const styles = {
     padding: "10px 120px 10px 15px"
   },
   countryImg: {
-    height: 25,
-    width: 25,
+    height: 45,
+    width: 45,
     padding: 10
   },
   countryText: {

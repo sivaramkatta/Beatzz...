@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "../images/logo1.png";
 
-const scopes = "user-read-private user-read-email";
+const scopes =
+  "user-read-private user-read-email user-read-recently-played user-top-read";
 const redirect_uri = "http://localhost:3000/redirecting/";
 const my_client_id = "ce89838d1d684c2b99207918a9062d3a";
 var state = generateRandomString(16);
@@ -71,6 +72,7 @@ const styles = {
   LoginLink: {
     color: "#000000",
     fontSize: 15,
-    padding: "2px 30px 2px 30px"
+    padding: "2px 30px 2px 30px",
+    userSelect: "none"
   }
 };
