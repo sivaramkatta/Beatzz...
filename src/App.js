@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import Redirecting from "./components/Redirecting";
 import Profile from "./components/Profile";
 import Sidebar from "./components/Sidebar";
+import Search from "./components/Search";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         <Sidebar>
           <Route path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route path="/search">
+            <Search />
           </Route>
           <Route path="/profile">
             <Profile />

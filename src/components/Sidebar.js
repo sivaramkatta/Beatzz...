@@ -21,6 +21,31 @@ import SearchIcon from "@material-ui/icons/Search";
 const drawerWidth = 240;
 export const TrackContext = React.createContext();
 
+const Player = ({ left, track }) => (
+  <div
+    style={{
+      position: "fixed",
+      bottom: -10,
+      zIndex: 1,
+      display: "flex",
+      flex: 1,
+      opacity: 0.9,
+      right: 0,
+      left: left
+    }}
+  >
+    <iframe
+      title="song"
+      src={`https://open.spotify.com/embed/${track}`}
+      height="90"
+      width="100%"
+      frameborder="0"
+      allowtransparency="true"
+      allow="encrypted-media"
+    />
+  </div>
+);
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex"
@@ -110,9 +135,31 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <div style={styles.ImgLogoText}>
-            <img src={logo} style={styles.imgStyle} alt="logo" />
-            <p style={{ padding: 0, margin: 4 }}>Beatzz...</p>
+          <div
+            style={{
+              display: "flex",
+              flex: 1,
+              justifyContent: "space-between"
+            }}
+          >
+            <div style={styles.ImgLogoText}>
+              <img src={logo} style={styles.imgStyle} alt="logo" />
+              <p style={{ padding: 0, margin: 4 }}>Beatzz...</p>
+            </div>
+            <Hidden xsDown implementation="css">
+              <p
+                style={{
+                  float: "right",
+                  padding: 0,
+                  margin: 6,
+                  fontFamily: "monospace",
+                  fontSize: 17,
+                  color: "grey"
+                }}
+              >
+                music makes me high
+              </p>
+            </Hidden>
           </div>
         </Toolbar>
       </AppBar>
@@ -152,25 +199,13 @@ function ResponsiveDrawer(props) {
           {props.children}
         </TrackContext.Provider>
         {track && (
-          <div
-            style={{
-              position: "sticky",
-              bottom: 0,
-              zIndex: 1,
-              display: "flex",
-              flex: 1,
-              opacity: 0.9
-            }}
-          >
-            <iframe
-              title="song"
-              src={`https://open.spotify.com/embed/${track}`}
-              height="90"
-              width="100%"
-              frameborder="0"
-              allowtransparency="true"
-              allow="encrypted-media"
-            />
+          <div>
+            <Hidden smUp implementation="css">
+              <Player left={0} track={track} />
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Player left={240} track={track} />
+            </Hidden>
           </div>
         )}
       </main>
