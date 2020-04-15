@@ -6,6 +6,6 @@ export function setItem(cname, cvalue) {
   localStorage.setItem(cname, cvalue);
 }
 
-export function removeAllItems(item) {
+export function removeItem(item) {
   localStorage.removeItem(item);
 }

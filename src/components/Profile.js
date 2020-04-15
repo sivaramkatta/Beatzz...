@@ -6,6 +6,7 @@ import Email from "../images/email.png";
 import Subscription from "../images/subscription.svg";
 import { getCountryName } from "../utils/countryName";
 import Country from "../images/country.png";
+import { removeItem } from "../utils/cookie";
 
 function Profile() {
   const [loading, data, error] = useGET("https://api.spotify.com/v1/me");
@@ -71,19 +72,45 @@ function Profile() {
                 </b>
               </p>
             </div>
-            <div style={{ ...styles.EmailContainer, marginTop: 24 }}>
+            <div
+              style={{
+                ...styles.EmailContainer,
+                marginTop: 24
+              }}
+            >
               <img src={Country} alt="img" style={styles.countryImg} />
               <p style={styles.countryText}>
                 <b>Country: {getCountryName(country)}</b>
               </p>
             </div>
             <div
-              style={styles.ButtonContainer}
-              onClick={() => {
-                window.location.href = "https://www.spotify.com/";
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                marginBottom: 30
               }}
             >
-              <p style={styles.LoginLink}>Edit</p>
+              <div
+                style={styles.ButtonContainer}
+                onClick={() => {
+                  window.location.href = "https://www.spotify.com/";
+                }}
+              >
+                <p style={styles.LoginLink}>{`Edit  `}</p>
+              </div>
+              <div
+                style={{
+                  ...styles.ButtonContainer,
+                  backgroundColor: "#D00000",
+                  marginLeft: 30
+                }}
+                onClick={() => {
+                  removeItem("access_token");
+                  window.location.href = "http://localhost:3000/";
+                }}
+              >
+                <p style={{ ...styles.LoginLink, color: "white" }}>Logout</p>
+              </div>
             </div>
           </div>
         </div>

@@ -18,6 +18,7 @@ import { withRouter } from "react-router-dom";
 import logo from "../images/logo1.png";
 import SearchIcon from "@material-ui/icons/Search";
 import CategoryIcon from "@material-ui/icons/Category";
+import MusicNoteIcon from "@material-ui/icons/MusicNote";
 
 const drawerWidth = 240;
 export const TrackContext = React.createContext();
@@ -81,6 +82,7 @@ const Tabs = [
   { title: "Home", component: <HomeIcon />, route: "/dashboard" },
   { title: "Search", component: <SearchIcon />, route: "/search" },
   { title: "Genre", component: <CategoryIcon />, route: "/categories" },
+  { title: "Artists", component: <MusicNoteIcon />, route: "/artists" },
   { title: "Profile", component: <AccountBoxIcon />, route: "/profile" }
 ];
 
@@ -144,7 +146,12 @@ function ResponsiveDrawer(props) {
               justifyContent: "space-between"
             }}
           >
-            <div style={styles.ImgLogoText}>
+            <div
+              style={styles.ImgLogoText}
+              onClick={() => {
+                props.history.push("/dashboard");
+              }}
+            >
               <img src={logo} style={styles.imgStyle} alt="logo" />
               <p style={{ padding: 0, margin: 4 }}>Beatzz...</p>
             </div>

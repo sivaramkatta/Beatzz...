@@ -1,29 +1,28 @@
 import React from "react";
 import { useGET } from "../utils/api";
-import TrackCard from "../widgets/CommonCard";
+import ArtistCard from "../widgets/ArtistCard";
 import Loader from "react-loader-spinner";
 import { withRouter } from "react-router-dom";
 
-function Category({ match, history }) {
-  let { slug } = match.params;
+function Artists({ history }) {
   const [loading, data, error] = useGET(
-    `https://api.spotify.com/v1/browse/categories/${slug}/playlists`
+    "https://api.spotify.com/v1/me/following?type=artist&limit=50"
   );
   let List = null;
-  if (data.playlists) {
-    List = data.playlists.items.map((track, index) => {
+  if (data.artists) {
+    List = data.artists.items.map((artist, index) => {
       return (
         <div
           key={index}
           onClick={() => {
-            history.push(`/playlist/${track.id}`);
+            history.push(`/artist/${artist.id}/top-tracks`);
           }}
         >
-          <TrackCard
-            isCategory={true}
-            artist={""}
-            track={track.name}
-            imageDetails={track.images[0]}
+          <ArtistCard
+            name={artist.name}
+            followers={artist.followers.total}
+            imageDetails={artist.images[0]}
+            genres={artist.genres}
           />
         </div>
       );
@@ -31,7 +30,7 @@ function Category({ match, history }) {
   }
   return (
     <div>
-      <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>Playlists</h2>
+      <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>Artists You Follow</h2>
       <div
         style={{
           display: "flex",
@@ -49,4 +48,4 @@ function Category({ match, history }) {
   );
 }
 
-export default withRouter(Category);
+export default withRouter(Artists);

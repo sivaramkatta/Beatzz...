@@ -1,29 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TrackContext } from "./Sidebar";
 import { useGET } from "../utils/api";
 import TrackCard from "../widgets/CommonCard";
 import Loader from "react-loader-spinner";
-import { withRouter } from "react-router-dom";
 
-function Category({ match, history }) {
+function Tracks({ match }) {
+  const { setTrack } = useContext(TrackContext);
   let { slug } = match.params;
   const [loading, data, error] = useGET(
-    `https://api.spotify.com/v1/browse/categories/${slug}/playlists`
+    `https://api.spotify.com/v1/artists/${slug}/top-tracks?country=IN`
   );
   let List = null;
-  if (data.playlists) {
-    List = data.playlists.items.map((track, index) => {
+  if (data.tracks) {
+    List = data.tracks.map((track, index) => {
       return (
         <div
           key={index}
           onClick={() => {
-            history.push(`/playlist/${track.id}`);
+            setTrack(`${track.type}/${track.id}`);
           }}
         >
           <TrackCard
-            isCategory={true}
-            artist={""}
+            artist={track.artists[0].name}
             track={track.name}
-            imageDetails={track.images[0]}
+            imageDetails={track.album.images[1]}
           />
         </div>
       );
@@ -31,7 +31,7 @@ function Category({ match, history }) {
   }
   return (
     <div>
-      <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>Playlists</h2>
+      <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>Top Picks from Artist</h2>
       <div
         style={{
           display: "flex",
@@ -49,4 +49,4 @@ function Category({ match, history }) {
   );
 }
 
-export default withRouter(Category);
+export default Tracks;
