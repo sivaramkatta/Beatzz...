@@ -24,7 +24,6 @@ function Welcome() {
     )}${
       scopes ? `&scope=${encodeURIComponent(scopes)}` : ""
     }&state=${state}&expires_in=1`;
-    console.log("inte", loginURL);
     window.location.href = loginURL;
   };
   return (

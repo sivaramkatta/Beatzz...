@@ -11,7 +11,6 @@ function Category({ match, history }) {
   );
   let List = null;
   if (data.playlists) {
-    console.log(data.playlists.items);
     List = data.playlists.items.map((track, index) => {
       return (
         <div

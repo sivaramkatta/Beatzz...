@@ -11,7 +11,6 @@ function Artists({ history }) {
   let List = null;
   if (data.artists) {
     List = data.artists.items.map((artist, index) => {
-      console.log(artist);
       return (
         <div
           key={index}
