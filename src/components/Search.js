@@ -35,6 +35,14 @@ function Search() {
       </div>
     ));
   }
+
+  if (error) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 25 }}>
+        <h2>something went wrong</h2>
+      </div>
+    );
+  }
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "center" }}>

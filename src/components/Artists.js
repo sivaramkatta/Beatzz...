@@ -28,6 +28,14 @@ function Artists({ history }) {
       );
     });
   }
+
+  if (error) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 25 }}>
+        <h2>something went wrong</h2>
+      </div>
+    );
+  }
   return (
     <div>
       <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>Artists You Follow</h2>
