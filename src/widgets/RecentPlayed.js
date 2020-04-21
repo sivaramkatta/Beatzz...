@@ -40,6 +40,9 @@ function RecentPlayedWidget({ setTrack }) {
       );
     });
   }
+  if (error) {
+    return null;
+  }
   return (
     <div>
       <h2 style={{ paddingLeft: 16, paddingTop: 25 }}>Recently played</h2>

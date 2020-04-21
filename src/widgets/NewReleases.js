@@ -27,6 +27,9 @@ function NewReleasesWidget({ setTrack }) {
       );
     });
   }
+  if (error) {
+    return null;
+  }
   return (
     <div>
       <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>New Releases</h2>

@@ -27,6 +27,9 @@ function TopPicksWidget({ setTrack }) {
       );
     });
   }
+  if (error) {
+    return null;
+  }
   return (
     <div>
       <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>Top Picks For You</h2>
