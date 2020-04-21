@@ -24,8 +24,8 @@ function Profile() {
     );
   } else if (error) {
     return (
-      <div>
-        <p style={{ textAlign: "center" }}>something went wrong</p>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 25 }}>
+        <h2>something went wrong</h2>
       </div>
     );
   } else {
