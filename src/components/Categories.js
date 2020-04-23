@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 
 function Categories({ history }) {
   const [loading, data, error] = useGET(
-    "https://api.spotify.com/v1/browse/categories?limit=10&country=IN"
+    "https://api.spotify.com/v1/browse/categories?limit=50&country=IN"
   );
   let List = null;
   if (data.categories) {

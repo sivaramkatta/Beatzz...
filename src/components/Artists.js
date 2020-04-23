@@ -3,6 +3,7 @@ import { useGET } from "../utils/api";
 import ArtistCard from "../widgets/ArtistCard";
 import Loader from "react-loader-spinner";
 import { withRouter } from "react-router-dom";
+import ArtistList from "../widgets/RecommendedArtists";
 
 function Artists({ history }) {
   const [loading, data, error] = useGET(
@@ -19,7 +20,7 @@ function Artists({ history }) {
             flex: 1
           }}
         >
-          You dont follow any Artist
+          You don't follow any Artist
         </h3>
       );
     } else {
@@ -37,6 +38,7 @@ function Artists({ history }) {
               followers={artist.followers.total}
               imageDetails={artist.images[0]}
               genres={artist.genres}
+              type="unfollow"
             />
           </div>
         );
@@ -67,6 +69,9 @@ function Artists({ history }) {
           !!List && List
         )}
       </div>
+      {data && data.artists && data.artists.items.length === 0 ? (
+        <ArtistList />
+      ) : null}
     </div>
   );
 }

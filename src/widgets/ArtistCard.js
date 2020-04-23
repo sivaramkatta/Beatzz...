@@ -7,11 +7,13 @@ const ArtistCard = ({
   name,
   followers,
   imageDetails = {},
-  genres = []
+  genres = [],
+  type = null
 }) => {
   const [loading, setLoading] = useState(false);
   const [result, setData] = useState(false);
-  const handleOnClick = async () => {
+
+  const handleUnfollow = async () => {
     setLoading(true);
     await fetch(
       `https://api.spotify.com/v1/me/following?type=artist&ids=${id}`,
@@ -25,6 +27,22 @@ const ArtistCard = ({
     setLoading(false);
     setData(true);
   };
+
+  const handleFollow = async () => {
+    setLoading(true);
+    await fetch(
+      `https://api.spotify.com/v1/me/following?type=artist&ids=${id}`,
+      {
+        method: "put",
+        headers: {
+          Authorization: `Bearer ${getItem("access_token")}`
+        }
+      }
+    );
+    setLoading(false);
+    setData(true);
+  };
+
   return (
     <div
       style={{
@@ -84,32 +102,38 @@ const ArtistCard = ({
       >
         Followers: {followers}
       </p>
-      <div
-        style={{ cursor: "pointer" }}
-        onClick={e => {
-          e.stopPropagation();
-          handleOnClick();
-        }}
-      >
-        {!result && !loading && (
-          <p
-            className="link"
-            style={{ textAlign: "end", color: "black", opacity: 0.9 }}
-          >
-            <b> Unfollow</b>
+      <div>
+        <div
+          style={{ cursor: "pointer" }}
+          onClick={e => {
+            e.stopPropagation();
+            if (type === "unfollow") {
+              handleUnfollow();
+            } else if (type === "follow") {
+              handleFollow();
+            }
+          }}
+        >
+          {!result && !loading && (
+            <p
+              className="link"
+              style={{ textAlign: "end", color: "black", opacity: 0.9 }}
+            >
+              <b>{type === "unfollow" ? "Unfollow" : "Follow"}</b>
+            </p>
+          )}
+        </div>
+        {loading && (
+          <p style={{ textAlign: "end", color: "#00CC00" }}>
+            <b>Loading</b>
+          </p>
+        )}
+        {result && (
+          <p style={{ textAlign: "end", color: "#00CC00" }}>
+            &#10003; <b>{type === "unfollow" ? "Unfollowed" : "Following"}</b>
           </p>
         )}
       </div>
-      {loading && (
-        <p style={{ textAlign: "end", color: "#00CC00" }}>
-          <b>Loading</b>
-        </p>
-      )}
-      {result && (
-        <p style={{ textAlign: "end", color: "#00CC00" }}>
-          &#10003; <b>Unfollowed</b>
-        </p>
-      )}
     </div>
   );
 };
