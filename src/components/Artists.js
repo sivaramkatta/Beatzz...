@@ -10,23 +10,38 @@ function Artists({ history }) {
   );
   let List = null;
   if (data.artists) {
-    List = data.artists.items.map((artist, index) => {
-      return (
-        <div
-          key={index}
-          onClick={() => {
-            history.push(`/artist/${artist.id}/top-tracks`);
+    if (data.artists.items.length === 0) {
+      List = (
+        <h3
+          style={{
+            textAlign: "center",
+            color: "grey",
+            flex: 1
           }}
         >
-          <ArtistCard
-            name={artist.name}
-            followers={artist.followers.total}
-            imageDetails={artist.images[0]}
-            genres={artist.genres}
-          />
-        </div>
+          You dont follow any Artist
+        </h3>
       );
-    });
+    } else {
+      List = data.artists.items.map((artist, index) => {
+        return (
+          <div
+            key={index}
+            onClick={() => {
+              history.push(`/artist/${artist.id}/top-tracks`);
+            }}
+          >
+            <ArtistCard
+              id={artist.id}
+              name={artist.name}
+              followers={artist.followers.total}
+              imageDetails={artist.images[0]}
+              genres={artist.genres}
+            />
+          </div>
+        );
+      });
+    }
   }
 
   if (error) {
