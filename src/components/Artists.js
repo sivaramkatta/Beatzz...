@@ -3,6 +3,7 @@ import { useGET } from "../utils/api";
 import ArtistCard from "../widgets/ArtistCard";
 import Loader from "react-loader-spinner";
 import { withRouter } from "react-router-dom";
+import ArtistList from "../widgets/RecommendedArtists";
 
 function Artists({ history }) {
   const [loading, data, error] = useGET(
@@ -10,23 +11,39 @@ function Artists({ history }) {
   );
   let List = null;
   if (data.artists) {
-    List = data.artists.items.map((artist, index) => {
-      return (
-        <div
-          key={index}
-          onClick={() => {
-            history.push(`/artist/${artist.id}/top-tracks`);
+    if (data.artists.items.length === 0) {
+      List = (
+        <h3
+          style={{
+            textAlign: "center",
+            color: "grey",
+            flex: 1
           }}
         >
-          <ArtistCard
-            name={artist.name}
-            followers={artist.followers.total}
-            imageDetails={artist.images[0]}
-            genres={artist.genres}
-          />
-        </div>
+          You don't follow any Artist
+        </h3>
       );
-    });
+    } else {
+      List = data.artists.items.map((artist, index) => {
+        return (
+          <div
+            key={index}
+            onClick={() => {
+              history.push(`/artist/${artist.id}/top-tracks`);
+            }}
+          >
+            <ArtistCard
+              id={artist.id}
+              name={artist.name}
+              followers={artist.followers.total}
+              imageDetails={artist.images[0]}
+              genres={artist.genres}
+              type="unfollow"
+            />
+          </div>
+        );
+      });
+    }
   }
 
   if (error) {
@@ -52,6 +69,9 @@ function Artists({ history }) {
           !!List && List
         )}
       </div>
+      {data && data.artists && data.artists.items.length === 0 ? (
+        <ArtistList />
+      ) : null}
     </div>
   );
 }
