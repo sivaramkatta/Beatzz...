@@ -39,7 +39,23 @@ function Tracks({ match }) {
   }
   return (
     <div>
-      <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>Top Picks from Artist</h2>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          margin: 24
+        }}
+      >
+        <h2 style={{ margin: 0, paddingRight: 50 }}>Top Picks from Artist</h2>
+        <div
+          style={styles.ButtonContainer}
+          onClick={() => {
+            setTrack(`artist/${slug}`);
+          }}
+        >
+          <p style={styles.LoginLink}>{`Play All`}</p>
+        </div>
+      </div>
       <div
         style={{
           display: "flex",
@@ -58,3 +74,21 @@ function Tracks({ match }) {
 }
 
 export default Tracks;
+
+const styles = {
+  LoginLink: {
+    color: "#000000",
+    fontSize: 15,
+    textAlign: "center",
+    paddingTop: 7,
+    fontWeight: 600,
+    margin: 0
+  },
+  ButtonContainer: {
+    backgroundColor: "#1DB954",
+    borderRadius: 50,
+    height: 35,
+    width: 100,
+    boxShadow: "1px 1px 6px grey"
+  }
+};

@@ -8,7 +8,7 @@ function Playlist({ match }) {
   const { setTrack } = useContext(TrackContext);
   let { slug } = match.params;
   const [loading, data, error] = useGET(
-    `https://api.spotify.com/v1/playlists/${slug}/tracks?limit=10`
+    `https://api.spotify.com/v1/playlists/${slug}/tracks?limit=50`
   );
   let List = null;
   if (data.items) {
@@ -39,7 +39,23 @@ function Playlist({ match }) {
   }
   return (
     <div>
-      <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>Playlists Tracks</h2>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          margin: 24
+        }}
+      >
+        <h2 style={{ margin: 0, paddingRight: 50 }}>Playlists Tracks</h2>
+        <div
+          style={styles.ButtonContainer}
+          onClick={() => {
+            setTrack(`playlist/${slug}`);
+          }}
+        >
+          <p style={styles.LoginLink}>{`Play All`}</p>
+        </div>
+      </div>
       <div
         style={{
           display: "flex",
@@ -58,3 +74,21 @@ function Playlist({ match }) {
 }
 
 export default Playlist;
+
+const styles = {
+  LoginLink: {
+    color: "#000000",
+    fontSize: 15,
+    textAlign: "center",
+    paddingTop: 7,
+    fontWeight: 600,
+    margin: 0
+  },
+  ButtonContainer: {
+    backgroundColor: "#1DB954",
+    borderRadius: 50,
+    height: 35,
+    width: 100,
+    boxShadow: "1px 1px 6px grey"
+  }
+};
