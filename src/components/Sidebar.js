@@ -210,9 +210,11 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content} style={{ margin: 0, padding: 0 }}>
         <div className={classes.toolbar} />
-        <TrackContext.Provider value={{ setTrack }}>
-          {props.children}
-        </TrackContext.Provider>
+        <div style={{ marginBottom: 16 }}>
+          <TrackContext.Provider value={{ setTrack }}>
+            {props.children}
+          </TrackContext.Provider>
+        </div>
         {track && (
           <div style={{ marginTop: 100 }}>
             <Hidden smUp implementation="css">
