@@ -3,8 +3,9 @@ import { useGET } from "../utils/api";
 import TrackCard from "../widgets/CommonCard";
 import { TrackContext } from "../components/Sidebar";
 import Loader from "react-loader-spinner";
+import { withRouter } from "react-router-dom";
 
-function Playlist({ match }) {
+function Playlist({ match, history }) {
   const { setTrack } = useContext(TrackContext);
   let { slug } = match.params;
   const [loading, data, error] = useGET(
@@ -12,22 +13,56 @@ function Playlist({ match }) {
   );
   let List = null;
   if (data.items) {
-    List = data.items.map(({ track }, index) => {
-      return (
+    if (data.items.length === 0) {
+      List = (
         <div
-          key={index}
-          onClick={() => {
-            setTrack(`${track.type}/${track.id}`);
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center"
           }}
         >
-          <TrackCard
-            artist={track.artists[0].name}
-            track={track.name}
-            imageDetails={track.album.images[0]}
-          />
+          <h3
+            style={{
+              textAlign: "center",
+              color: "grey"
+            }}
+          >
+            No tracks in Playlist
+          </h3>
+          <div
+            style={{
+              ...styles.ButtonContainer,
+              margin: 7,
+              marginLeft: 24
+            }}
+            onClick={() => {
+              history.push("/search");
+            }}
+          >
+            <p style={styles.LoginLink}>Search</p>
+          </div>
         </div>
       );
-    });
+    } else {
+      List = data.items.map(({ track }, index) => {
+        return (
+          <div
+            key={index}
+            onClick={() => {
+              setTrack(`${track.type}/${track.id}`);
+            }}
+          >
+            <TrackCard
+              artist={track.artists[0].name}
+              track={track.name}
+              imageDetails={track.album.images[0]}
+            />
+          </div>
+        );
+      });
+    }
   }
 
   if (error) {
@@ -47,14 +82,16 @@ function Playlist({ match }) {
         }}
       >
         <h2 style={{ margin: 0, paddingRight: 50 }}>Playlists Tracks</h2>
-        <div
-          style={styles.ButtonContainer}
-          onClick={() => {
-            setTrack(`playlist/${slug}`);
-          }}
-        >
-          <p style={styles.LoginLink}>{`Play All`}</p>
-        </div>
+        {data.items && data.items.length > 0 && (
+          <div
+            style={styles.ButtonContainer}
+            onClick={() => {
+              setTrack(`playlist/${slug}`);
+            }}
+          >
+            <p style={styles.LoginLink}>{`Play All`}</p>
+          </div>
+        )}
       </div>
       <div
         style={{
@@ -73,7 +110,7 @@ function Playlist({ match }) {
   );
 }
 
-export default Playlist;
+export default withRouter(Playlist);
 
 const styles = {
   LoginLink: {

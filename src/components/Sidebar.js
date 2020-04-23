@@ -19,6 +19,7 @@ import logo from "../images/logo1.png";
 import SearchIcon from "@material-ui/icons/Search";
 import CategoryIcon from "@material-ui/icons/Category";
 import MusicNoteIcon from "@material-ui/icons/MusicNote";
+import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 
 const drawerWidth = 240;
 export const TrackContext = React.createContext();
@@ -83,6 +84,7 @@ const Tabs = [
   { title: "Search", component: <SearchIcon />, route: "/search" },
   { title: "Genre", component: <CategoryIcon />, route: "/categories" },
   { title: "Artists", component: <MusicNoteIcon />, route: "/artists" },
+  { title: "Playlists", component: <PlaylistPlayIcon />, route: "/playlists" },
   { title: "Profile", component: <AccountBoxIcon />, route: "/profile" }
 ];
 
