@@ -103,7 +103,13 @@ function ResponsiveDrawer(props) {
         <div className={classes.toolbar} />
       </Hidden>
       <Divider />
-      <List>
+      <List
+        style={
+          window.screen.width < 960 && window.screen.width > 600
+            ? { marginTop: 65 }
+            : {}
+        }
+      >
         {Tabs.map((item, index) => (
           <ListItem
             button
