@@ -1,8 +1,7 @@
 import React, { useState, useContext } from "react";
-import Loader from "react-loader-spinner";
 import { TrackContext } from "../components/Sidebar";
 import { useGET } from "../utils/api";
-import TrackCard from "../widgets/CommonCard";
+import GenericCard from "../widgets/CommonCard";
 import TopPicks from "../widgets/TopPicks";
 
 function Search() {
@@ -26,10 +25,9 @@ function Search() {
           setTrack(`${track.type}/${track.id}`);
         }}
       >
-        <TrackCard
-          artist={track.artists[0].name}
-          track={track.name}
-          duration={track.duration_ms}
+        <GenericCard
+          title={track.name}
+          subtitle={track.artists[0].name}
           imageDetails={track.album.images[1]}
         />
       </div>

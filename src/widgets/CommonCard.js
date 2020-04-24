@@ -1,18 +1,18 @@
 import React from "react";
 import TrackDefault from "../images/defaultTrack.jpg";
 
-const TrackCard = ({
-  artist,
-  track,
+const GenericCard = ({
+  title = "",
+  subtitle = "",
   imageDetails = {},
-  isCategory = false
+  mini = false
 }) => {
   return (
     <div
       style={{
         cursor: "pointer",
         backgroundColor: "white",
-        height: isCategory ? 280 : 300,
+        height: mini ? 280 : 300,
         padding: 16,
         width: 230,
         margin: 12,
@@ -36,9 +36,9 @@ const TrackCard = ({
           marginTop: 8
         }}
       >
-        {track}
+        {title}
       </p>
-      {!isCategory && (
+      {!mini && (
         <p
           style={{
             color: "grey",
@@ -49,11 +49,11 @@ const TrackCard = ({
             textOverflow: "ellipsis"
           }}
         >
-          {artist}
+          {subtitle}
         </p>
       )}
     </div>
   );
 };
 
-export default TrackCard;
+export default GenericCard;

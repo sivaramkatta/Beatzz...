@@ -1,17 +1,55 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useGET } from "../utils/api";
-import TrackCard from "../widgets/CommonCard";
+import GenericCard from "../widgets/CommonCard";
 import { TrackContext } from "../components/Sidebar";
 import Loader from "react-loader-spinner";
 import { withRouter } from "react-router-dom";
+import { getItem } from "../utils/cookie";
 
 function Playlist({ match, history }) {
-  const { setTrack } = useContext(TrackContext);
+  let List = null;
+  let PlayButton = null;
   let { slug } = match.params;
+  const { setTrack } = useContext(TrackContext);
+  const [following, setFollowing] = useState(false);
+  const [checkedFollowing, setCheckedFollowing] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [data2, setData2] = useState(false);
   const [loading, data, error] = useGET(
     `https://api.spotify.com/v1/playlists/${slug}/tracks?limit=50`
   );
-  let List = null;
+  const userID = JSON.parse(getItem("user")).id;
+  const [, data1] = useGET(
+    `https://api.spotify.com/v1/playlists/${slug}/followers/contains?ids=${userID}`
+  );
+
+  if (data1.length > 0 && !checkedFollowing) {
+    setFollowing(data1[0]);
+    setCheckedFollowing(true);
+  }
+
+  const handleClick = async () => {
+    setLoading2(true);
+    if (following) {
+      await fetch(`https://api.spotify.com/v1/playlists/${slug}/followers`, {
+        method: "delete",
+        headers: {
+          Authorization: `Bearer ${getItem("access_token")}`
+        }
+      });
+    } else {
+      await fetch(`https://api.spotify.com/v1/playlists/${slug}/followers`, {
+        method: "put",
+        headers: {
+          Authorization: `Bearer ${getItem("access_token")}`
+        },
+        body: { public: true }
+      });
+    }
+    setLoading2(false);
+    setData2(true);
+  };
+
   if (data.items) {
     if (data.items.length === 0) {
       List = (
@@ -46,6 +84,16 @@ function Playlist({ match, history }) {
         </div>
       );
     } else {
+      PlayButton = (
+        <div
+          style={styles.ButtonContainer}
+          onClick={() => {
+            setTrack(`playlist/${slug}`);
+          }}
+        >
+          <p style={styles.LoginLink}>Play All</p>
+        </div>
+      );
       List = data.items.map(({ track }, index) => {
         return (
           <div
@@ -54,11 +102,13 @@ function Playlist({ match, history }) {
               setTrack(`${track.type}/${track.id}`);
             }}
           >
-            <TrackCard
-              artist={track.artists[0].name}
-              track={track.name}
-              imageDetails={track.album.images[0]}
-            />
+            {track && (
+              <GenericCard
+                title={track.name}
+                subtitle={track.artists[0].name}
+                imageDetails={track.album.images[0]}
+              />
+            )}
           </div>
         );
       });
@@ -77,21 +127,59 @@ function Playlist({ match, history }) {
       <div
         style={{
           display: "flex",
-          alignItems: "center",
+          flexDirection: "row",
+          flexWrap: "wrap",
           margin: 24
         }}
       >
-        <h2 style={{ margin: 0, paddingRight: 50 }}>Playlists Tracks</h2>
-        {data.items && data.items.length > 0 && (
-          <div
-            style={styles.ButtonContainer}
-            onClick={() => {
-              setTrack(`playlist/${slug}`);
-            }}
-          >
-            <p style={styles.LoginLink}>{`Play All`}</p>
-          </div>
-        )}
+        <h2 style={{ margin: 0, paddingRight: 50, marginBottom: 24 }}>
+          Playlists Tracks
+        </h2>
+        <div style={{ display: "flex" }}>
+          {PlayButton}
+          {checkedFollowing && (
+            <div
+              style={{
+                ...styles.ButtonContainer2,
+                ...{ backgroundColor: following ? "#D00000" : "#1DB954" }
+              }}
+              onClick={() => {
+                handleClick();
+              }}
+            >
+              {!loading2 && !data2 && (
+                <p
+                  style={{
+                    ...styles.LoginLink,
+                    ...{ color: following ? "#ffffff" : "#000000" }
+                  }}
+                >
+                  {following ? "Unfollow Playlist" : "Follow Playlist"}
+                </p>
+              )}
+              {loading2 && (
+                <p
+                  style={{
+                    ...styles.LoginLink,
+                    ...{ color: following ? "#ffffff" : "#000000" }
+                  }}
+                >
+                  Loading...
+                </p>
+              )}
+              {data2 && (
+                <p
+                  style={{
+                    ...styles.LoginLink,
+                    ...{ color: following ? "#ffffff" : "#000000" }
+                  }}
+                >
+                  &#10003; <b>{following ? "Removed" : "Following"}</b>
+                </p>
+              )}
+            </div>
+          )}
+        </div>
       </div>
       <div
         style={{
@@ -126,6 +214,14 @@ const styles = {
     borderRadius: 50,
     height: 35,
     width: 100,
+    boxShadow: "1px 1px 6px grey"
+  },
+  ButtonContainer2: {
+    backgroundColor: "#1DB954",
+    borderRadius: 50,
+    width: 150,
+    height: 35,
+    marginLeft: 24,
     boxShadow: "1px 1px 6px grey"
   }
 };

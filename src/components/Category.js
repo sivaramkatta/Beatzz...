@@ -1,6 +1,6 @@
 import React from "react";
 import { useGET } from "../utils/api";
-import TrackCard from "../widgets/CommonCard";
+import GenericCard from "../widgets/CommonCard";
 import Loader from "react-loader-spinner";
 import { withRouter } from "react-router-dom";
 
@@ -11,19 +11,18 @@ function Category({ match, history }) {
   );
   let List = null;
   if (data.playlists) {
-    List = data.playlists.items.map((track, index) => {
+    List = data.playlists.items.map((playlist, index) => {
       return (
         <div
           key={index}
           onClick={() => {
-            history.push(`/playlist/${track.id}`);
+            history.push(`/playlist/${playlist.id}?ref=category`);
           }}
         >
-          <TrackCard
-            isCategory={true}
-            artist={""}
-            track={track.name}
-            imageDetails={track.images[0]}
+          <GenericCard
+            title={playlist.name}
+            imageDetails={playlist.images[0]}
+            mini={true}
           />
         </div>
       );

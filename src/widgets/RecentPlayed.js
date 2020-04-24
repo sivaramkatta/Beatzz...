@@ -1,6 +1,6 @@
 import React from "react";
 import { useGET } from "../utils/api";
-import TrackCard from "./CommonCard";
+import GenericCard from "./CommonCard";
 import Loader from "react-loader-spinner";
 
 function uniq(list) {
@@ -30,10 +30,9 @@ function RecentPlayedWidget({ setTrack }) {
             setTrack(`${track.type}/${track.id}`);
           }}
         >
-          <TrackCard
-            artist={track.artists[0].name}
-            track={track.name}
-            duration={track.duration_ms}
+          <GenericCard
+            title={track.name}
+            subtitle={track.artists[0].name}
             imageDetails={track.album.images[1]}
           />
         </div>

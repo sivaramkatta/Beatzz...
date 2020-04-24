@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { TrackContext } from "./Sidebar";
 import { useGET } from "../utils/api";
-import TrackCard from "../widgets/CommonCard";
+import GenericCard from "../widgets/CommonCard";
 import Loader from "react-loader-spinner";
 
 function Tracks({ match }) {
@@ -20,9 +20,9 @@ function Tracks({ match }) {
             setTrack(`${track.type}/${track.id}`);
           }}
         >
-          <TrackCard
-            artist={track.artists[0].name}
-            track={track.name}
+          <GenericCard
+            title={track.name}
+            subtitle={track.artists[0].name}
             imageDetails={track.album.images[1]}
           />
         </div>

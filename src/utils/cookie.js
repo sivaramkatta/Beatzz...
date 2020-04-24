@@ -6,6 +6,7 @@ export function setItem(cname, cvalue) {
   localStorage.setItem(cname, cvalue);
 }
 
-export function removeItem(item) {
-  localStorage.removeItem(item);
+export function removeItems(iem) {
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("user");
 }
