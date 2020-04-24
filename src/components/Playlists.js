@@ -65,8 +65,8 @@ function Playlists({ history }) {
       })
     });
     setLoading1(false);
-    setShowModal(false);
     window.location.reload();
+    setShowModal(false);
   };
 
   if (error) {
