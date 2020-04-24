@@ -48,6 +48,9 @@ function Playlist({ match, history }) {
     }
     setLoading2(false);
     setData2(true);
+    if (following && history.location.search !== "?ref=category") {
+      history.push("/playlists");
+    }
   };
 
   if (data.items) {
@@ -137,46 +140,58 @@ function Playlist({ match, history }) {
         </h2>
         <div style={{ display: "flex" }}>
           {PlayButton}
-          {checkedFollowing && (
+          {checkedFollowing &&
+            following &&
+            history.location.search !== "?ref=category" && (
+              <div
+                style={{
+                  ...styles.ButtonContainer2,
+                  backgroundColor: "#D00000"
+                }}
+                onClick={() => {
+                  handleClick();
+                }}
+              >
+                <p
+                  style={{
+                    ...styles.LoginLink,
+                    color: "#ffffff"
+                  }}
+                >
+                  {loading2 ? (
+                    "Loading..."
+                  ) : data2 ? (
+                    <p style={{ margin: 0 }}>&#10003; Removed</p>
+                  ) : (
+                    "Unfollow Playlist"
+                  )}
+                </p>
+              </div>
+            )}
+          {checkedFollowing && !following && (
             <div
               style={{
                 ...styles.ButtonContainer2,
-                ...{ backgroundColor: following ? "#D00000" : "#1DB954" }
+                backgroundColor: "#1DB954"
               }}
               onClick={() => {
                 handleClick();
               }}
             >
-              {!loading2 && !data2 && (
-                <p
-                  style={{
-                    ...styles.LoginLink,
-                    ...{ color: following ? "#ffffff" : "#000000" }
-                  }}
-                >
-                  {following ? "Unfollow Playlist" : "Follow Playlist"}
-                </p>
-              )}
-              {loading2 && (
-                <p
-                  style={{
-                    ...styles.LoginLink,
-                    ...{ color: following ? "#ffffff" : "#000000" }
-                  }}
-                >
-                  Loading...
-                </p>
-              )}
-              {data2 && (
-                <p
-                  style={{
-                    ...styles.LoginLink,
-                    ...{ color: following ? "#ffffff" : "#000000" }
-                  }}
-                >
-                  &#10003; <b>{following ? "Removed" : "Following"}</b>
-                </p>
-              )}
+              <p
+                style={{
+                  ...styles.LoginLink,
+                  color: "#000000"
+                }}
+              >
+                {loading2 ? (
+                  "Loading..."
+                ) : data2 ? (
+                  <p style={{ margin: 0 }}>&#10003; Following</p>
+                ) : (
+                  "Follow Playlist"
+                )}
+              </p>
             </div>
           )}
         </div>
