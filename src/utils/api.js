@@ -23,7 +23,6 @@ export function useGET(url, dependency = []) {
             setError(error);
           }
         } else {
-          console.log("success", data);
           setLoading(false);
           setData(data);
         }

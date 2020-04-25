@@ -31,14 +31,15 @@ function Playlists({ history }) {
   let userID = null;
   let List = null;
   if (data.items) {
-    const hrefArray = data.href.split("/");
-    userID = hrefArray[5];
+    userID = JSON.parse(getItem("user")).id;
+    const owner = JSON.parse(getItem("user")).display_name;
     List = data.items.map((playlist, index) => {
+      const owned = owner === playlist.owner.display_name;
       return (
         <div
           key={index}
           onClick={() => {
-            history.push(`/playlist/${playlist.id}`);
+            history.push(`/playlist/${playlist.id}?owned=${owned}`);
           }}
         >
           <GenericCard

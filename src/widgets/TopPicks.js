@@ -21,6 +21,9 @@ function TopPicksWidget({ setTrack }) {
             title={track.name}
             subtitle={track.artists[0].name}
             imageDetails={track.album.images[1]}
+            type="Add to Playlist"
+            uri={track.uri}
+            play_type={track.type}
           />
         </div>
       );

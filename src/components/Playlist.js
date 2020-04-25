@@ -110,6 +110,15 @@ function Playlist({ match, history }) {
                 title={track.name}
                 subtitle={track.artists[0].name}
                 imageDetails={track.album.images[0]}
+                type={
+                  history.location.search === "?owned=true"
+                    ? "Remove from Playlist"
+                    : "Add to Playlist"
+                }
+                uri={track.uri}
+                play_type={track.type}
+                position={index}
+                playlistID={slug}
               />
             )}
           </div>
