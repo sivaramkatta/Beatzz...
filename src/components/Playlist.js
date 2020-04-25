@@ -183,7 +183,8 @@ function Playlist({ match, history }) {
             <div
               style={{
                 ...styles.ButtonContainer2,
-                backgroundColor: "#1DB954"
+                backgroundColor: "#1DB954",
+                marginLeft: PlayButton ? 24 : 0
               }}
               onClick={() => {
                 handleClick();
