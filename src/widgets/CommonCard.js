@@ -1,18 +1,24 @@
 import React from "react";
 import TrackDefault from "../images/defaultTrack.jpg";
+import ActionList from "./TrackActions";
 
-const TrackCard = ({
-  artist,
-  track,
+const GenericCard = ({
+  title = "",
+  subtitle = "",
   imageDetails = {},
-  isCategory = false
+  mini = false,
+  type = null,
+  uri = null,
+  play_type = null,
+  position = null,
+  playlistID = null
 }) => {
   return (
     <div
       style={{
         cursor: "pointer",
         backgroundColor: "white",
-        height: isCategory ? 280 : 300,
+        height: mini ? 280 : type ? 320 : 300,
         padding: 16,
         width: 230,
         margin: 12,
@@ -36,9 +42,9 @@ const TrackCard = ({
           marginTop: 8
         }}
       >
-        {track}
+        {title}
       </p>
-      {!isCategory && (
+      {!mini && (
         <p
           style={{
             color: "grey",
@@ -46,14 +52,23 @@ const TrackCard = ({
             fontWeight: 600,
             whiteSpace: "nowrap",
             overflow: "hidden",
-            textOverflow: "ellipsis"
+            textOverflow: "ellipsis",
+            marginBottom: 0
           }}
         >
-          {artist}
+          {subtitle}
         </p>
+      )}
+      {type && play_type === "track" && (
+        <ActionList
+          type={type}
+          uri={uri}
+          position={position}
+          playlistID={playlistID}
+        />
       )}
     </div>
   );
 };
 
-export default TrackCard;
+export default GenericCard;

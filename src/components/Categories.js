@@ -1,6 +1,6 @@
 import React from "react";
 import { useGET } from "../utils/api";
-import TrackCard from "../widgets/CommonCard";
+import GenericCard from "../widgets/CommonCard";
 import Loader from "react-loader-spinner";
 import { withRouter } from "react-router-dom";
 
@@ -18,11 +18,10 @@ function Categories({ history }) {
             history.push(`/category/${track.id}`);
           }}
         >
-          <TrackCard
-            isCategory={true}
-            artist={""}
-            track={track.name}
+          <GenericCard
+            title={track.name}
             imageDetails={track.icons[0]}
+            mini={true}
           />
         </div>
       );

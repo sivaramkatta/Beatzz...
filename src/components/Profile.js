@@ -6,7 +6,7 @@ import Email from "../images/email.png";
 import Subscription from "../images/subscription.svg";
 import { getCountryName } from "../utils/countryName";
 import Country from "../images/country.png";
-import { removeItem } from "../utils/cookie";
+import { removeItems } from "../utils/cookie";
 
 function Profile() {
   const [loading, data, error] = useGET("https://api.spotify.com/v1/me");
@@ -105,7 +105,7 @@ function Profile() {
                   marginLeft: 30
                 }}
                 onClick={() => {
-                  removeItem("access_token");
+                  removeItems();
                   window.location.href = "http://localhost:3000/";
                 }}
               >
