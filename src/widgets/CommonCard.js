@@ -18,7 +18,7 @@ const GenericCard = ({
       style={{
         cursor: "pointer",
         backgroundColor: "white",
-        height: mini ? 280 : type ? 320 : 300,
+        height: mini ? 270 : type ? 320 : 300,
         padding: 16,
         width: 230,
         margin: 12,
