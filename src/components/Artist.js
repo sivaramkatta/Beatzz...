@@ -4,7 +4,7 @@ import { useGET } from "../utils/api";
 import GenericCard from "../widgets/CommonCard";
 import Loader from "react-loader-spinner";
 
-function Tracks({ match }) {
+function Artist({ match }) {
   const { setTrack } = useContext(TrackContext);
   let { slug } = match.params;
   const [loading, data, error] = useGET(
@@ -76,7 +76,7 @@ function Tracks({ match }) {
   );
 }
 
-export default Tracks;
+export default Artist;
 
 const styles = {
   LoginLink: {

@@ -29,7 +29,7 @@ function Artists({ history }) {
           <div
             key={index}
             onClick={() => {
-              history.push(`/artist/${artist.id}/top-tracks`);
+              history.push(`/artist/${artist.id}`);
             }}
           >
             <ArtistCard

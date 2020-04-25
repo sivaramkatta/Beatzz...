@@ -10,7 +10,7 @@ import Categories from "./components/Categories";
 import CategoryPlaylists from "./components/Category";
 import Playlist from "./components/Playlist";
 import Artists from "./components/Artists";
-import Tracks from "./components/Tracks";
+import Artist from "./components/Artist";
 import NoMatch from "./components/NoMatch";
 import Playlists from "./components/Playlists";
 
@@ -30,7 +30,7 @@ function App() {
             <Route path="/playlist/:slug" component={Playlist} />
             <Route path="/playlists" component={Playlists} />
             <Route path="/artists" component={Artists} />
-            <Route path="/artist/:slug/top-tracks" component={Tracks} />
+            <Route path="/artist/:slug" component={Artist} />
             <Route component={NoMatch} />
           </Switch>
         </Sidebar>
