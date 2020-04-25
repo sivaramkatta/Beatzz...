@@ -23,7 +23,6 @@ const customStyles = {
 function Playlists({ history }) {
   const [showModal, setShowModal] = useState(false);
   const [playlistName, setName] = useState("");
-  const [description, setDescription] = useState("");
   const [loading1, setLoading1] = useState(false);
   const [loading, data, error] = useGET(
     "https://api.spotify.com/v1/me/playlists?limit=50"
@@ -33,23 +32,45 @@ function Playlists({ history }) {
   if (data.items) {
     userID = JSON.parse(getItem("user")).id;
     const owner = JSON.parse(getItem("user")).display_name;
-    List = data.items.map((playlist, index) => {
-      const owned = owner === playlist.owner.display_name;
-      return (
+    if (data.items.length === 0) {
+      List = (
         <div
-          key={index}
-          onClick={() => {
-            history.push(`/playlist/${playlist.id}?owned=${owned}`);
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center"
           }}
         >
-          <GenericCard
-            title={playlist.name}
-            imageDetails={playlist.images[0]}
-            mini={true}
-          />
+          <h3
+            style={{
+              textAlign: "center",
+              color: "grey"
+            }}
+          >
+            You dont follow or own any Playlist
+          </h3>
         </div>
       );
-    });
+    } else {
+      List = data.items.map((playlist, index) => {
+        const owned = owner === playlist.owner.display_name;
+        return (
+          <div
+            key={index}
+            onClick={() => {
+              history.push(`/playlist/${playlist.id}?owned=${owned}`);
+            }}
+          >
+            <GenericCard
+              title={playlist.name}
+              imageDetails={playlist.images[0]}
+              mini={true}
+            />
+          </div>
+        );
+      });
+    }
   }
 
   const handleCreateClick = async () => {
@@ -61,7 +82,7 @@ function Playlists({ history }) {
       },
       body: JSON.stringify({
         name: playlistName,
-        description: description,
+        description: "",
         public: false
       })
     });
@@ -124,24 +145,6 @@ function Playlists({ history }) {
               placeholder="Playlist name"
               onChange={e => {
                 setName(e.target.value);
-              }}
-            />
-            <input
-              style={{
-                margin: 24,
-                height: 40,
-                width: 250,
-                outline: "none",
-                fontSize: 16,
-                borderColor: "black",
-                borderRadius: 20,
-                borderWidth: 2,
-                padding: 5,
-                textAlign: "center"
-              }}
-              placeholder="Description"
-              onChange={e => {
-                setDescription(e.target.value);
               }}
             />
           </div>

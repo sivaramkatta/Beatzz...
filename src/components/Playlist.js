@@ -76,13 +76,14 @@ function Playlist({ match, history }) {
             style={{
               ...styles.ButtonContainer,
               margin: 7,
-              marginLeft: 24
+              marginLeft: 24,
+              width: 110
             }}
             onClick={() => {
               history.push("/search");
             }}
           >
-            <p style={styles.LoginLink}>Search</p>
+            <p style={styles.LoginLink}>Add tracks</p>
           </div>
         </div>
       );
@@ -155,7 +156,8 @@ function Playlist({ match, history }) {
               <div
                 style={{
                   ...styles.ButtonContainer2,
-                  backgroundColor: "#D00000"
+                  backgroundColor: "#D00000",
+                  marginLeft: PlayButton ? 24 : 0
                 }}
                 onClick={() => {
                   handleClick();
@@ -245,7 +247,6 @@ const styles = {
     borderRadius: 50,
     width: 150,
     height: 35,
-    marginLeft: 24,
     boxShadow: "1px 1px 6px grey"
   }
 };
