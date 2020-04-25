@@ -117,9 +117,20 @@ const ArtistCard = ({
           {!result && !loading && (
             <p
               className="link"
-              style={{ textAlign: "end", color: "black", opacity: 0.9 }}
+              style={{
+                textAlign: "end",
+                color: "white"
+              }}
             >
-              <b>{type === "unfollow" ? "Unfollow" : "Follow"}</b>
+              <b
+                style={{
+                  backgroundColor: "#1DB954",
+                  padding: "3px 15px",
+                  borderRadius: 10
+                }}
+              >
+                {type === "unfollow" ? "Unfollow" : "Follow"}
+              </b>
             </p>
           )}
         </div>
