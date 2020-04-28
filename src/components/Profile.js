@@ -7,6 +7,7 @@ import Subscription from "../images/subscription.svg";
 import { getCountryName } from "../utils/countryName";
 import Country from "../images/country.png";
 import { removeItems } from "../utils/cookie";
+import config from "../config";
 
 function Profile() {
   const [loading, data, error] = useGET("https://api.spotify.com/v1/me");
@@ -106,7 +107,7 @@ function Profile() {
                 }}
                 onClick={() => {
                   removeItems();
-                  window.location.href = "http://localhost:3000/";
+                  window.location.href = config.base_url;
                 }}
               >
                 <p style={{ ...styles.LoginLink, color: "white" }}>Logout</p>

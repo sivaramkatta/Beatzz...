@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getItem, removeItems } from "./cookie";
+import config from "../config";
 
 export function useGET(url, dependency = []) {
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,7 @@ export function useGET(url, dependency = []) {
         if (data.hasOwnProperty("error")) {
           if (data.error.status === 401) {
             removeItems();
-            window.location.href = "http://localhost:3000/";
+            window.location.href = config.base_url;
           } else {
             console.log("error", data);
             setLoading(false);
