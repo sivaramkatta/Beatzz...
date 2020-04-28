@@ -6,6 +6,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Modal from "react-modal";
 import { getItem, removeItems } from "../utils/cookie";
+import config from "../config";
 
 const customStyles = {
   content: {
@@ -88,7 +89,7 @@ const ActionList = ({ type, uri, position, playlistID }) => {
           if (data.hasOwnProperty("error")) {
             if (data.error.status === 401) {
               removeItems();
-              window.location.href = "http://localhost:3000/";
+              window.location.href = config.base_url;
             } else {
               console.log("error", data);
               setLoading(false);
@@ -125,7 +126,7 @@ const ActionList = ({ type, uri, position, playlistID }) => {
           if (data.hasOwnProperty("error")) {
             if (data.error.status === 401) {
               removeItems();
-              window.location.href = "http://localhost:3000/";
+              window.location.href = config.base_url;
             } else {
               console.log("error", data);
               setLoading(false);
