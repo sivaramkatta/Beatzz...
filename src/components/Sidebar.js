@@ -160,7 +160,7 @@ function ResponsiveDrawer(props) {
                 props.history.push("/dashboard");
               }}
             >
-              <img src={logo} style={styles.imgStyle} alt="logo" />
+              {/* <img src={logo} style={styles.imgStyle} alt="logo" /> */}
               <p style={{ padding: 0, margin: 4 }}>Beatzz...</p>
             </div>
             <Hidden xsDown implementation="css">

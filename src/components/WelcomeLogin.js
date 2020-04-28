@@ -29,7 +29,7 @@ function Welcome() {
   return (
     <div style={styles.Container}>
       <header style={styles.AppHeader}>
-        <img src={logo} style={styles.AppLogo} alt="logo" />
+        {/* <img src={logo} style={styles.AppLogo} alt="logo" /> */}
         <p style={styles.Name}>
           <b>Beatzz...</b>
         </p>
