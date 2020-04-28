@@ -15,7 +15,6 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import HomeIcon from "@material-ui/icons/Home";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { withRouter } from "react-router-dom";
-import logo from "../images/logo1.png";
 import SearchIcon from "@material-ui/icons/Search";
 import CategoryIcon from "@material-ui/icons/Category";
 import MusicNoteIcon from "@material-ui/icons/MusicNote";
