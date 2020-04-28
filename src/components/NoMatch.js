@@ -13,21 +13,7 @@ export default function NoMatch() {
         flexDirection: "column"
       }}
     >
-      <Hidden smDown>
-        <img
-          src={PageNotFound}
-          alt="img"
-          style={{ height: 300, width: 500, borderRadius: 4 }}
-        />
-      </Hidden>
-      <Hidden smUp>
-        <img
-          src={PageNotFound}
-          alt="img"
-          style={{ height: 150, width: 250, borderRadius: 4, marginTop: "20%" }}
-        />
-      </Hidden>
-      <h1>Page not found </h1>
+      <h1>404 Page not found </h1>
     </div>
   );
 }

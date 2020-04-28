@@ -1,9 +1,10 @@
 import React from "react";
 import logo from "../images/logo1.png";
+import config from "../config";
 
 const scopes =
   "user-read-private user-read-email user-read-recently-played user-top-read playlist-modify-public playlist-modify-private user-follow-read user-follow-modify playlist-read-private";
-const redirect_uri = "http://localhost:3000/redirecting/";
+const redirect_uri = `${config.base_url}/redirecting/`;
 const my_client_id = "ce89838d1d684c2b99207918a9062d3a";
 var state = generateRandomString(16);
 function generateRandomString(length) {
@@ -29,9 +30,27 @@ function Welcome() {
   return (
     <div style={styles.Container}>
       <header style={styles.AppHeader}>
-        <img src={logo} style={styles.AppLogo} alt="logo" />
+        <div
+          style={{
+            backgroundColor: "#E00000 ",
+            height: 150,
+            width: 150,
+            borderRadius: 75
+          }}
+        >
+          <p
+            style={{
+              fontSize: 85,
+              margin: 0,
+              textAlign: "center",
+              marginTop: 20
+            }}
+          >
+            &#9835;
+          </p>
+        </div>
         <p style={styles.Name}>
-          <b>Beatzz...</b>
+          <b>Beatzz... </b>
         </p>
         <div style={styles.ButtonContainer} onClick={RedirectToLogin}>
           <p style={styles.LoginLink}>
