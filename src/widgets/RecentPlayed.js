@@ -41,6 +41,8 @@ function RecentPlayedWidget({ setTrack }) {
   }
   if (error) {
     return null;
+  } else if (data && data.items && data.items.length === 0) {
+    return null;
   }
   return (
     <div>

@@ -28,10 +28,12 @@ function NewReleasesWidget({ setTrack }) {
   }
   if (error) {
     return null;
+  } else if (albums && albums.items && albums.items.length === 0) {
+    return null;
   }
   return (
     <div>
-      <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>New Releases</h2>
+      <h2 style={{ paddingLeft: 16, paddingTop: 24 }}>New Releases</h2>
       <div
         style={{
           display: "flex",

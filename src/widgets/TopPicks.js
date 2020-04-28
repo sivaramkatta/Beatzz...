@@ -31,10 +31,12 @@ function TopPicksWidget({ setTrack }) {
   }
   if (error) {
     return null;
+  } else if (data && data.items && data.items.length === 0) {
+    return null;
   }
   return (
     <div>
-      <h2 style={{ paddingLeft: 16, paddingTop: 16 }}>Top Picks For You</h2>
+      <h2 style={{ paddingLeft: 16, paddingTop: 24 }}>Top Picks For You</h2>
       <div
         style={{
           display: "flex",
