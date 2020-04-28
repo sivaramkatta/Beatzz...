@@ -29,9 +29,27 @@ function Welcome() {
   return (
     <div style={styles.Container}>
       <header style={styles.AppHeader}>
-        <img src={logo} style={styles.AppLogo} alt="logo" />
+        <div
+          style={{
+            backgroundColor: "#E00000 ",
+            height: 150,
+            width: 150,
+            borderRadius: 75
+          }}
+        >
+          <p
+            style={{
+              fontSize: 85,
+              margin: 0,
+              textAlign: "center",
+              marginTop: 20
+            }}
+          >
+            &#9835;
+          </p>
+        </div>
         <p style={styles.Name}>
-          <b>Beatzz...</b>
+          <b>Beatzz... </b>
         </p>
         <div style={styles.ButtonContainer} onClick={RedirectToLogin}>
           <p style={styles.LoginLink}>

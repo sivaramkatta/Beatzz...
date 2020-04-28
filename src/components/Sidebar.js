@@ -160,7 +160,27 @@ function ResponsiveDrawer(props) {
                 props.history.push("/dashboard");
               }}
             >
-              <img src={logo} style={styles.imgStyle} alt="logo" />
+              <div
+                style={{
+                  backgroundColor: "#E00000",
+                  height: 25,
+                  width: 25,
+                  borderRadius: 13,
+                  paddingRight: 5,
+                  marginRight: 5
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: 18,
+                    margin: 0,
+                    textAlign: "center",
+                    paddingLeft: 5
+                  }}
+                >
+                  &#9835;
+                </p>
+              </div>
               <p style={{ padding: 0, margin: 4 }}>Beatzz...</p>
             </div>
             <Hidden xsDown implementation="css">
@@ -236,17 +256,11 @@ export default withRouter(ResponsiveDrawer);
 
 const styles = {
   ImgLogoText: {
-    paddingLeft: 12,
     margin: 0,
     color: "#ffffff",
     fontSize: 20,
     fontWeight: 800,
-    display: "flex"
-  },
-  imgStyle: {
-    height: 25,
-    width: 25,
-    paddingRight: 5,
-    paddingTop: 5
+    display: "flex",
+    alignItems: "baseline"
   }
 };
