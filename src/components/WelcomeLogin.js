@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../images/logo1.png";
+import logo from "../images/logo1.jpg";
 import config from "../config";
 
 const scopes =
@@ -30,25 +30,7 @@ function Welcome() {
   return (
     <div style={styles.Container}>
       <header style={styles.AppHeader}>
-        <div
-          style={{
-            backgroundColor: "#E00000 ",
-            height: 150,
-            width: 150,
-            borderRadius: 75
-          }}
-        >
-          <p
-            style={{
-              fontSize: 85,
-              margin: 0,
-              textAlign: "center",
-              marginTop: 20
-            }}
-          >
-            &#9835;
-          </p>
-        </div>
+        <img src={logo} style={{ height: 200, width: 220 }} alt="img" />
         <p style={styles.Name}>
           <b>Beatzz... </b>
         </p>
@@ -85,7 +67,7 @@ const styles = {
     color: "white"
   },
   Name: {
-    fontSize: "40px"
+    fontSize: 40
   },
   LoginLink: {
     color: "#000000",

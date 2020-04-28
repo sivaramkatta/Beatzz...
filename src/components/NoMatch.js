@@ -1,6 +1,4 @@
 import React from "react";
-import Hidden from "@material-ui/core/Hidden";
-import PageNotFound from "../images/pageNotFound.png";
 
 export default function NoMatch() {
   return (
