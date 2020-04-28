@@ -30,7 +30,7 @@ function Welcome() {
   return (
     <div style={styles.Container}>
       <header style={styles.AppHeader}>
-        <img src={logo} style={{ height: 200, width: 220 }} alt="img" />
+        <img src={logo} style={{ height: 190, width: 220 }} alt="img" />
         <p style={styles.Name}>
           <b>Beatzz... </b>
         </p>
