@@ -7,6 +7,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Modal from "react-modal";
 import { getItem, removeItems } from "../utils/cookie";
 import config from "../config";
+import { withRouter } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -54,7 +55,7 @@ const PlaylistCard = ({ name, image }) => {
   );
 };
 
-const ActionList = ({ type, uri, position, playlistID }) => {
+const ActionList = ({ type, uri, position, playlistID, history }) => {
   let List = null;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [showModal, setShowModal] = React.useState(false);
@@ -162,30 +163,55 @@ const ActionList = ({ type, uri, position, playlistID }) => {
   };
 
   if (data) {
-    const userID = JSON.parse(getItem("user")).id;
-    List = data.items.map(playlist => {
-      if (userID === playlist.owner.id) {
-        return (
+    if (data.items.length === 0) {
+      List = (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <h3 style={{ textAlign: "center", margin: 0 }}>
+            No playlist available
+          </h3>
           <div
-            key={playlist.id}
+            style={styles.ButtonContainer}
             onClick={e => {
               e.stopPropagation();
-              handlePlaylistClick(playlist.id);
+              history.push("/playlists");
             }}
           >
-            <PlaylistCard
-              name={playlist.name}
-              image={
-                playlist.images.length > 0
-                  ? playlist.images[0].url
-                  : TrackDefault
-              }
-            />
+            <p style={styles.LoginLink}>Create</p>
           </div>
-        );
-      }
-      return null;
-    });
+        </div>
+      );
+    } else {
+      const userID = JSON.parse(getItem("user")).id;
+      List = data.items.map(playlist => {
+        if (userID === playlist.owner.id) {
+          return (
+            <div
+              key={playlist.id}
+              onClick={e => {
+                e.stopPropagation();
+                handlePlaylistClick(playlist.id);
+              }}
+            >
+              <PlaylistCard
+                name={playlist.name}
+                image={
+                  playlist.images.length > 0
+                    ? playlist.images[0].url
+                    : TrackDefault
+                }
+              />
+            </div>
+          );
+        }
+        return null;
+      });
+    }
   }
 
   return (
@@ -241,4 +267,23 @@ const ActionList = ({ type, uri, position, playlistID }) => {
   );
 };
 
-export default ActionList;
+export default withRouter(ActionList);
+
+const styles = {
+  LoginLink: {
+    color: "#000000",
+    fontSize: 15,
+    textAlign: "center",
+    paddingTop: 7,
+    fontWeight: 600,
+    margin: 0
+  },
+  ButtonContainer: {
+    backgroundColor: "#1DB954",
+    borderRadius: 50,
+    height: 35,
+    width: 100,
+    marginLeft: 20,
+    boxShadow: "1px 1px 6px grey"
+  }
+};
