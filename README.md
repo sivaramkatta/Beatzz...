@@ -1,5 +1,5 @@
 ## Desktop and Mobile Music Player using Spotify API
 # To setup the repo locally
-- clone the repo
+- git clone https://github.com/sivaramkatta/Beatzz....git
 - npm install
-- npm start (start the development server)
+- npm start
